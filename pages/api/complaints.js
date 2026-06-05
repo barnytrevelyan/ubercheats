@@ -15,21 +15,75 @@ export const config = {
 }
 
 const EXCHANGE_RATES = {
+  // Major/Reserve Currencies
   USD: 1,
   EUR: 0.92,
   GBP: 0.79,
-  CAD: 1.36,
-  AUD: 1.53,
-  INR: 83.12,
   JPY: 149.5,
+  CHF: 0.89,
+  CNY: 7.24,
+
+  // Americas
+  CAD: 1.36,
   MXN: 17.05,
   BRL: 4.97,
-  ZAR: 18.65,
+  ARS: 834.5,
+  CLP: 873.45,
+  COP: 3948.3,
+  PEN: 3.68,
+
+  // Europe
+  SEK: 10.42,
+  NOK: 10.68,
+  DKK: 6.86,
+  PLN: 4.02,
+  CZK: 23.45,
+  HUF: 363.2,
+  RON: 4.97,
+  HRK: 6.86,
+  RUB: 97.5,
+  TRY: 33.28,
+
+  // Asia-Pacific
+  AUD: 1.53,
   NZD: 1.65,
   SGD: 1.35,
   HKD: 7.81,
-  CHF: 0.89,
-  SEK: 10.42,
+  KRW: 1305.6,
+  THB: 35.92,
+  MYR: 4.71,
+  PHP: 56.78,
+  IDR: 16245,
+  VND: 24680,
+
+  // South Asia
+  INR: 83.12,
+  PKR: 278.45,
+  BDT: 104.72,
+  LKR: 312.5,
+  NPR: 132.4,
+
+  // Middle East & Africa
+  AED: 3.67,
+  SAR: 3.75,
+  KWD: 0.31,
+  QAR: 3.64,
+  OMR: 0.38,
+  JOD: 0.71,
+  ILS: 3.68,
+  EGP: 30.85,
+  ZAR: 18.65,
+  GHS: 12.45,
+  NGN: 1540.5,
+  KES: 145.3,
+  UGX: 3725,
+
+  // Central Asia
+  KZT: 436.5,
+  UZS: 11850,
+
+  // Others
+  ISK: 137.45,
 }
 
 const parseForm = (req) => {
