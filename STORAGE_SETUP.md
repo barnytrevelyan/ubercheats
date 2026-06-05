@@ -1,17 +1,22 @@
-# Supabase Storage Setup for File Uploads
+# Supabase Storage Setup for File Uploads & Multi-Currency Support
 
-Your updated site now supports file uploads (evidence, screenshots, etc.). Follow these steps to enable it:
+Your updated site now supports file uploads and multi-currency amounts with USD conversion. Follow these steps to enable it:
 
-## Step 1: Run the Migration SQL
+## Step 1: Run Both Migration SQLs
 
 1. Go to your Supabase project dashboard
 2. Click **SQL Editor** (left sidebar)
 3. Click **New Query**
-4. Paste the contents of `supabase-migration.sql` and click **Run**
 
-This adds two new columns to your complaints table:
+**First, run `supabase-migration.sql`:**
+This adds:
 - `uber_order_number` - for Uber order references
 - `file_urls` - array of URLs to uploaded evidence files
+
+**Then, run `supabase-migration-multi-currency.sql`:**
+This adds:
+- `order_currency` - the currency used (USD, EUR, GBP, etc.)
+- `order_amount_usd` - automatic USD conversion for comparison
 
 ## Step 2: Create the Storage Bucket
 

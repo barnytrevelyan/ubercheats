@@ -115,8 +115,11 @@ export default function ComplaintList() {
 
               <div className="flex flex-wrap gap-4 text-sm text-gray-600 border-t border-gray-100 pt-3 mb-3">
                 {complaint.order_amount && (
-                  <div>
-                    <span className="font-semibold">Amount:</span> ${parseFloat(complaint.order_amount).toFixed(2)}
+                  <div className="bg-blue-50 px-3 py-2 rounded">
+                    <span className="font-semibold">Amount:</span> {complaint.order_currency || 'USD'} {parseFloat(complaint.order_amount).toFixed(2)}
+                    {complaint.order_amount_usd && complaint.order_currency !== 'USD' && (
+                      <div className="text-xs text-gray-600 mt-1">≈ USD ${parseFloat(complaint.order_amount_usd).toFixed(2)}</div>
+                    )}
                   </div>
                 )}
                 {complaint.order_date && (

@@ -8,6 +8,24 @@ const CATEGORIES = [
   'Other',
 ]
 
+const CURRENCIES = [
+  { code: 'USD', symbol: '$', name: 'US Dollar', rate: 1 },
+  { code: 'EUR', symbol: '€', name: 'Euro', rate: 0.92 },
+  { code: 'GBP', symbol: '£', name: 'British Pound', rate: 0.79 },
+  { code: 'CAD', symbol: 'C$', name: 'Canadian Dollar', rate: 1.36 },
+  { code: 'AUD', symbol: 'A$', name: 'Australian Dollar', rate: 1.53 },
+  { code: 'INR', symbol: '₹', name: 'Indian Rupee', rate: 83.12 },
+  { code: 'JPY', symbol: '¥', name: 'Japanese Yen', rate: 149.50 },
+  { code: 'MXN', symbol: '$', name: 'Mexican Peso', rate: 17.05 },
+  { code: 'BRL', symbol: 'R$', name: 'Brazilian Real', rate: 4.97 },
+  { code: 'ZAR', symbol: 'R', name: 'South African Rand', rate: 18.65 },
+  { code: 'NZD', symbol: 'NZ$', name: 'New Zealand Dollar', rate: 1.65 },
+  { code: 'SGD', symbol: 'S$', name: 'Singapore Dollar', rate: 1.35 },
+  { code: 'HKD', symbol: 'HK$', name: 'Hong Kong Dollar', rate: 7.81 },
+  { code: 'CHF', symbol: 'CHF', name: 'Swiss Franc', rate: 0.89 },
+  { code: 'SEK', symbol: 'kr', name: 'Swedish Krona', rate: 10.42 },
+]
+
 export default function ComplaintForm({ onSubmitSuccess }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -19,6 +37,7 @@ export default function ComplaintForm({ onSubmitSuccess }) {
     title: '',
     description: '',
     orderAmount: '',
+    orderCurrency: 'USD',
     orderDate: '',
     uberOrderNumber: '',
   })
@@ -51,6 +70,7 @@ export default function ComplaintForm({ onSubmitSuccess }) {
       data.append('title', formData.title)
       data.append('description', formData.description)
       data.append('orderAmount', formData.orderAmount)
+      data.append('orderCurrency', formData.orderCurrency)
       data.append('orderDate', formData.orderDate)
       data.append('uberOrderNumber', formData.uberOrderNumber)
 
@@ -76,6 +96,7 @@ export default function ComplaintForm({ onSubmitSuccess }) {
         title: '',
         description: '',
         orderAmount: '',
+        orderCurrency: 'USD',
         orderDate: '',
         uberOrderNumber: '',
       })
@@ -152,16 +173,31 @@ export default function ComplaintForm({ onSubmitSuccess }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Order Amount (USD)</label>
-        <input
-          type="number"
-          name="orderAmount"
-          value={formData.orderAmount}
-          onChange={handleChange}
-          step="0.01"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="0.00"
-        />
+        <label className="block text-gray-700 font-semibold mb-2">Order Amount</label>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            name="orderAmount"
+            value={formData.orderAmount}
+            onChange={handleChange}
+            step="0.01"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="0.00"
+          />
+          <select
+            name="orderCurrency"
+            value={formData.orderCurrency}
+            onChange={handleChange}
+            className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+          >
+            {CURRENCIES.map((curr) => (
+              <option key={curr.code} value={curr.code}>
+                {curr.code} ({curr.symbol})
+              </option>
+            ))}
+          </select>
+        </div>
+        <p className="text-xs text-gray-500 mt-1">Amount will be converted to USD for comparison</p>
       </div>
 
       <div className="mb-4">

@@ -14,6 +14,24 @@ export const config = {
   },
 }
 
+const EXCHANGE_RATES = {
+  USD: 1,
+  EUR: 0.92,
+  GBP: 0.79,
+  CAD: 1.36,
+  AUD: 1.53,
+  INR: 83.12,
+  JPY: 149.5,
+  MXN: 17.05,
+  BRL: 4.97,
+  ZAR: 18.65,
+  NZD: 1.65,
+  SGD: 1.35,
+  HKD: 7.81,
+  CHF: 0.89,
+  SEK: 10.42,
+}
+
 const parseForm = (req) => {
   return new Promise((resolve, reject) => {
     const form = formidable({ multiples: true })
@@ -22,6 +40,11 @@ const parseForm = (req) => {
       resolve({ fields, files })
     })
   })
+}
+
+const convertToUSD = (amount, currency) => {
+  const rate = EXCHANGE_RATES[currency] || 1
+  return parseFloat((amount / rate).toFixed(2))
 }
 
 export default async function handler(req, res) {
@@ -56,6 +79,7 @@ export default async function handler(req, res) {
       const title = Array.isArray(fields.title) ? fields.title[0] : fields.title
       const description = Array.isArray(fields.description) ? fields.description[0] : fields.description
       const orderAmount = Array.isArray(fields.orderAmount) ? fields.orderAmount[0] : fields.orderAmount
+      const orderCurrency = Array.isArray(fields.orderCurrency) ? fields.orderCurrency[0] : fields.orderCurrency
       const orderDate = Array.isArray(fields.orderDate) ? fields.orderDate[0] : fields.orderDate
       const uberOrderNumber = Array.isArray(fields.uberOrderNumber) ? fields.uberOrderNumber[0] : fields.uberOrderNumber
 
@@ -94,6 +118,8 @@ export default async function handler(req, res) {
         }
       }
 
+      const amountInUSD = orderAmount && orderCurrency ? convertToUSD(orderAmount, orderCurrency) : null
+
       const { data, error } = await supabase
         .from('complaints')
         .insert([
@@ -104,6 +130,8 @@ export default async function handler(req, res) {
             title,
             description,
             order_amount: orderAmount || null,
+            order_currency: orderCurrency || 'USD',
+            order_amount_usd: amountInUSD,
             order_date: orderDate || null,
             uber_order_number: uberOrderNumber || null,
             file_urls: fileUrls.length > 0 ? fileUrls : null,
