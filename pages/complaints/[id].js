@@ -25,6 +25,16 @@ export async function getServerSideProps({ params }) {
 export default function ComplaintPage({ complaint }) {
   const canonicalUrl = `${SITE_URL}/complaints/${complaint.id}`
 
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Cases', item: `${SITE_URL}/` },
+      { '@type': 'ListItem', position: 3, name: complaint.title, item: canonicalUrl },
+    ],
+  }
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Complaint',
@@ -61,10 +71,8 @@ export default function ComplaintPage({ complaint }) {
           content={complaint.description.slice(0, 200)}
         />
         {allImages[0] && <meta property="og:image" content={allImages[0]} />}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       </Head>
 
       <div className="min-h-screen bg-white">
@@ -78,7 +86,7 @@ export default function ComplaintPage({ complaint }) {
           </div>
         </nav>
 
-        <main className="max-w-4xl mx-auto px-4 py-10 sm:px-6">
+        <main id="main-content" className="max-w-4xl mx-auto px-4 py-10 sm:px-6">
           {/* Header */}
           <article>
             <header className="mb-8">

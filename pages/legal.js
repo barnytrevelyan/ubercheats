@@ -107,6 +107,16 @@ export default function Legal() {
   return (
     <>
       <Head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'NewsArticle',
+          headline: 'Uber Legal & Regulatory Tracker — FTC Lawsuit, ACCC Fine',
+          url: `${SITE_URL}/legal`,
+          datePublished: '2025-04-01',
+          dateModified: '2026-06-06',
+          author: { '@type': 'Organization', name: 'UberCheats', url: SITE_URL },
+          publisher: { '@type': 'Organization', name: 'UberCheats', url: SITE_URL },
+        }) }} />
         <title>Uber Legal & Regulatory Tracker — FTC Lawsuit, ACCC Fine | UberCheats</title>
         <meta name="description" content="Tracker of regulatory actions and lawsuits against Uber: FTC v. Uber (2025), NY AG lawsuit, ACCC $21M fine, California AB 578. Know your rights." />
         <link rel="canonical" href={`${SITE_URL}/legal`} />
@@ -136,7 +146,7 @@ export default function Legal() {
           </div>
         </header>
 
-        <main className="max-w-4xl mx-auto px-4 py-12 sm:px-6 space-y-8">
+        <main id="main-content" className="max-w-4xl mx-auto px-4 py-12 sm:px-6 space-y-8">
 
           <div className="p-4 bg-blue-50 border border-blue-200 rounded-xl text-sm text-blue-800">
             <strong>Why this matters for your dispute:</strong> Regulators track patterns across thousands of complaints.

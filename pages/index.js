@@ -85,6 +85,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('report')
   const [refreshKey, setRefreshKey] = useState(0)
   const [heroLoaded, setHeroLoaded] = useState(false)
+  const [selectedFormCategory, setSelectedFormCategory] = useState('')
 
   const handleSubmitSuccess = () => {
     setRefreshKey(prev => prev + 1)
@@ -181,7 +182,7 @@ export default function Home() {
           </div>
         </div>
 
-        <main className="max-w-6xl mx-auto px-4 py-12 sm:px-6">
+        <main id="main-content" className="max-w-6xl mx-auto px-4 py-12 sm:px-6">
 
           {/* Category cards */}
           <section className="mb-12">
@@ -190,7 +191,7 @@ export default function Home() {
               {CATEGORIES.map(cat => (
                 <button
                   key={cat.label}
-                  onClick={() => { setActiveTab('report') }}
+                  onClick={() => { setActiveTab('report'); setSelectedFormCategory(cat.label); }}
                   className="p-4 bg-white border border-gray-200 rounded-xl hover:border-red-400 hover:shadow-sm transition text-left group"
                 >
                   <div className="text-2xl mb-2">{cat.icon}</div>
@@ -230,7 +231,7 @@ export default function Home() {
                   <li>✓ Mark it <strong>resolved</strong> when you get your money back — and share what worked</li>
                 </ul>
               </div>
-              <ComplaintForm onSubmitSuccess={handleSubmitSuccess} />
+              <ComplaintForm onSubmitSuccess={handleSubmitSuccess} initialCategory={selectedFormCategory} />
             </div>
           )}
 

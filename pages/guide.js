@@ -112,6 +112,24 @@ export default function Guide() {
     <>
       <Head>
         <title>How to Get a Refund from Uber Eats — Complete Guide 2026 | UberCheats</title>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'TechArticle',
+          headline: 'How to Get a Refund from Uber Eats — Complete Guide 2026',
+          description: 'Step-by-step guide to getting your money back from Uber Eats: in-app dispute, social media escalation, bank chargeback, regulator complaint, and small claims court.',
+          url: `${SITE_URL}/guide`,
+          datePublished: '2026-01-01',
+          dateModified: '2026-06-06',
+          author: { '@type': 'Organization', name: 'UberCheats', url: SITE_URL },
+          publisher: { '@type': 'Organization', name: 'UberCheats', url: SITE_URL },
+          breadcrumb: {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+              { '@type': 'ListItem', position: 2, name: 'Refund Guide', item: `${SITE_URL}/guide` },
+            ],
+          },
+        }) }} />
         <meta name="description" content="Step-by-step guide to getting your money back from Uber Eats: in-app dispute, social media escalation, bank chargeback, regulator complaint, and small claims court. Works in UK, US, Kenya, Australia, India, and more." />
         <link rel="canonical" href={`${SITE_URL}/guide`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
@@ -168,7 +186,7 @@ export default function Guide() {
           </div>
         </div>
 
-        <main className="max-w-4xl mx-auto px-4 py-12 sm:px-6 space-y-12">
+        <main id="main-content" className="max-w-4xl mx-auto px-4 py-12 sm:px-6 space-y-12">
 
           {STEPS.map(step => (
             <section key={step.n} id={`step-${step.n}`} className="scroll-mt-16">

@@ -75,14 +75,21 @@ const CURRENCIES = [
   { code: 'PEN', symbol: 'S/', name: 'Peruvian Sol', rate: 3.68 },
 ]
 
-export default function ComplaintForm({ onSubmitSuccess }) {
+export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+
+  // Sync category when user clicks a category card on homepage
+  useEffect(() => {
+    if (initialCategory) {
+      setFormData(prev => ({ ...prev, category: initialCategory }))
+    }
+  }, [initialCategory])
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    category: 'Refund Not Issued',
+    category: initialCategory || 'Refund Not Issued',
     title: '',
     description: '',
     orderAmount: '',
@@ -159,7 +166,7 @@ export default function ComplaintForm({ onSubmitSuccess }) {
       setFormData({
         name: '',
         email: '',
-        category: 'Refund Not Issued',
+        category: initialCategory || 'Refund Not Issued',
         title: '',
         description: '',
         orderAmount: '',

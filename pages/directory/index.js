@@ -75,7 +75,7 @@ export default function DirectoryIndex({ countries }) {
           </div>
         </div>
 
-        <main className="max-w-6xl mx-auto px-4 py-12 sm:px-6">
+        <main id="main-content" className="max-w-6xl mx-auto px-4 py-12 sm:px-6">
 
           {/* How it works */}
           <section className="mb-12 grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
