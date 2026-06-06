@@ -260,7 +260,11 @@ export default function Home() {
               </div>
               <div>
                 <div className="font-semibold text-gray-300 mb-2 text-xs uppercase tracking-wide">Legal</div>
-                <p className="text-xs text-gray-500">{BRAND.disclaimer.footer}</p>
+                <ul className="space-y-1">
+                  <li><Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:text-white transition">Terms of Service</Link></li>
+                </ul>
+                <p className="text-xs text-gray-500 mt-2">{BRAND.disclaimer.footer}</p>
               </div>
             </div>
             <div className="border-t border-gray-800 pt-6 text-xs text-gray-600 text-center">

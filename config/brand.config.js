@@ -65,8 +65,8 @@ const BRAND = {
   // ── Homepage ───────────────────────────────────────────────────────────────
   hero: {
     badge: 'Independent consumer advocacy — not affiliated with Uber',
-    headline: 'Uber Eats refused your refund.',
-    subheadline: 'We make it public.',
+    headline: 'Uber Eats refused your refund?',
+    subheadline: 'Document it publicly.'
     body: 'A global, crowdsourced record of Uber Eats refund failures, double charges, and unresolved billing disputes. Every case is a permanent public record. Find out how to fight back in your country.',
     imageUrl: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=600&fit=crop&crop=center',
     imageAlt: 'Person stressed over billing dispute',
@@ -80,7 +80,7 @@ const BRAND = {
   },
 
   reportReasons: [
-    '✓ Creates a permanent public record — cannot be deleted',
+    '✓ Creates a public record, timestamped and searchable',
     '✓ Helps others facing the same problem find your case via search',
     '✓ Builds the evidence base for regulatory and legal action',
     '✓ You can add photos and updates to your case at any time',
@@ -113,7 +113,7 @@ const BRAND = {
 
   about: {
     heading: 'About UberCheats',
-    body: 'UberCheats is an independent, consumer-run platform documenting Uber and Uber Eats billing failures worldwide. We exist because Uber systematically fails to resolve legitimate refund requests, leaving customers with no recourse through official channels. Every case here is permanent. Use the Global Directory for country-specific escalation routes, the Refund Guide for step-by-step help, and the Legal Tracker to understand your rights.',
+    body: 'UberCheats is an independent, consumer-run platform documenting reported Uber and Uber Eats billing disputes worldwide. We exist because many users report that Uber fails to resolve legitimate refund requests, leaving them with no clear recourse through official channels. Every case here is permanent. Use the Global Directory for country-specific escalation routes, the Refund Guide for step-by-step help, and the Legal Tracker to understand your rights.',
     heroImage: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=320&fit=crop&crop=center',
     heroImageAlt: 'Consumer advocacy and community',
     whatWeOffer: [
@@ -480,6 +480,25 @@ Yours sincerely,
   // ── Currencies ─────────────────────────────────────────────────────────────
   defaultCurrency: 'USD',
   currencies: null, // null = use the full built-in list in ComplaintForm
+
+
+  // ── Privacy & legal pages config ──────────────────────────────────────────
+  privacy: {
+    controllerName: 'UberCheats',
+    controllerContact: 'privacy@ubercheats.info',
+    dataProcessors: [
+      { name: 'Supabase Inc.', location: 'United States', purpose: 'Database hosting and file storage', mechanism: 'Standard Contractual Clauses (SCCs)' },
+      { name: 'Vercel Inc.', location: 'United States', purpose: 'Website hosting and analytics', mechanism: 'Standard Contractual Clauses (SCCs)' },
+    ],
+    retentionPeriod: '3 years from submission, or upon valid erasure request',
+    dataCollected: ['Name (displayed publicly)', 'Email address (private)', 'Complaint description (displayed publicly)', 'Order amount and date', 'Order reference number', 'Uploaded evidence files'],
+    legalBasis: 'Consent (Article 6(1)(a) GDPR) — provided at point of submission',
+    cookieTypes: [
+      { name: 'Vercel Analytics', type: 'Analytics', purpose: 'Counts page visits and traffic sources. No personally identifiable information stored.', required: false },
+    ],
+    icoRegistration: 'Pending — apply at ico.org.uk/registration',
+    lastUpdated: 'June 2026',
+  },
 
   // ── Complaint form field labels ────────────────────────────────────────────
   formFields: {

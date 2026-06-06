@@ -73,7 +73,7 @@ export default async function handler(req, res) {
 
       let query = supabase
         .from('complaints')
-        .select('*')
+        .select('id, name, category, title, description, order_amount, order_currency, order_amount_usd, order_date, uber_order_number, file_urls, resolved, resolved_at, resolution_note, created_at, updated_at')
         .order('created_at', { ascending: false })
 
       if (category && category !== 'all') {
@@ -81,7 +81,23 @@ export default async function handler(req, res) {
       }
 
       if (email) {
-        query = query.eq('email', email)
+        // Require auth header to filter by email — prevents enumeration
+        const authHeader = req.headers.authorization
+        if (!authHeader) {
+          return res.status(401).json({ error: 'Authentication required to filter by email' })
+        }
+        const { data: { user }, error: authErr } = await supabase.auth.getUser(
+          authHeader.replace('Bearer ', '')
+        )
+        if (authErr || !user || user.email !== email) {
+          return res.status(403).json({ error: 'Forbidden' })
+        }
+        // For authenticated user's own complaints, include email in select
+        query = supabase
+          .from('complaints')
+          .select('*')
+          .eq('email', email)
+          .order('created_at', { ascending: false })
       }
 
       const { data, error } = await query

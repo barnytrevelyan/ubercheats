@@ -327,6 +327,14 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
         <p className="text-xs text-gray-500 mt-1">Screenshots, PDFs, receipts — anything that supports your case. Uploaded securely.</p>
       </div>
 
+      {/* Prominent public data warning — ABOVE submit button */}
+      <div className="mb-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
+        <strong>⚠️ Your name and complaint description will be publicly visible</strong> on this site and may be indexed by search engines.
+        Do not include information you wish to keep private. You can remove your personal details later via{' '}
+        <a href="/my-complaints" className="underline">My Cases</a>. By submitting you confirm this is a truthful account of your own experience.
+        See our <a href="/privacy" className="underline">Privacy Policy</a>.
+      </div>
+
       <button
         type="submit"
         disabled={loading}
@@ -334,10 +342,6 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
       >
         {loading ? 'Submitting...' : 'Submit Complaint'}
       </button>
-
-      <p className="text-xs text-gray-500 mt-4">
-        {BRAND.disclaimer.formTruthfulness}
-      </p>
     </form>
   )
 }

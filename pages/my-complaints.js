@@ -255,6 +255,23 @@ function ComplaintCard({ complaint: initialComplaint }) {
         <Link href={`/complaints/${complaint.id}`} className="text-gray-500 hover:text-gray-700">
           View public page →
         </Link>
+        {complaint.name !== '[Deleted]' && (
+          <button
+            onClick={async () => {
+              if (!confirm('Remove your personal details from this complaint? The case will remain but your name and description will be replaced with [Deleted]. This cannot be undone.')) return
+              const { data: { session: s } } = await (await import('../lib/supabase')).supabase.auth.getSession()
+              const res = await fetch(`/api/complaints/${complaint.id}`, {
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${s.access_token}` },
+              })
+              if (res.ok) reload()
+              else alert('Delete failed — please try again or email privacy@ubercheats.info')
+            }}
+            className="text-red-400 hover:text-red-600 font-medium text-xs"
+          >
+            🗑 Delete my data
+          </button>
+        )}
         {!complaint.resolved && (
           <button
             onClick={async () => {
