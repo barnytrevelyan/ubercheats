@@ -66,7 +66,7 @@ const BRAND = {
   hero: {
     badge: 'Independent consumer advocacy — not affiliated with Uber',
     headline: 'Uber Eats refused your refund?',
-    subheadline: 'Document it publicly.'
+    subheadline: 'Document it publicly.',
     body: 'A global, crowdsourced record of Uber Eats refund failures, double charges, and unresolved billing disputes. Every case is a permanent public record. Find out how to fight back in your country.',
     imageUrl: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=600&fit=crop&crop=center',
     imageAlt: 'Person stressed over billing dispute',
