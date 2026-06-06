@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Link from 'next/link'
 
 const CATEGORIES = [
   'All',
@@ -101,7 +102,7 @@ export default function ComplaintList() {
             <div key={complaint.id} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition duration-200">
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h3 className="text-lg font-bold text-gray-800">{complaint.title}</h3>
+                  <Link href={`/complaints/${complaint.id}`} className="text-lg font-bold text-gray-800 hover:text-blue-700 hover:underline">{complaint.title}</Link>
                   <p className="text-sm text-gray-600">
                     <span className="font-semibold">{complaint.name}</span> • {formatDate(complaint.created_at)}
                   </p>

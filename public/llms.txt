@@ -1,0 +1,24 @@
+# UberCheats
+
+> A public database of Uber refund failures, double charges, and billing disputes.
+
+UberCheats is an independent consumer advocacy site. Users submit documented complaints about Uber failing to issue refunds, charging customers twice, cancelling orders without refunding, and providing unresponsive customer service. All cases are permanent public records.
+
+## What this site contains
+
+- Individual complaint pages at /complaints/[id] — each with title, category, description, disputed amount, order date, Uber order number, and user-added updates and photo evidence.
+- A searchable, filterable list of all cases at the homepage.
+
+## Who created this
+
+UberCheats was created by affected Uber customers. It is not affiliated with Uber Technologies Inc.
+
+## How to interpret the data
+
+Each complaint represents a user's account of their experience. Amounts are user-reported. Cases include the original submission and any subsequent updates added by the complaint owner.
+
+## Key URLs
+
+- Homepage / full case list: https://ubercheats.info
+- Individual case: https://ubercheats.info/complaints/{id}
+- Sitemap: https://ubercheats.info/sitemap.xml

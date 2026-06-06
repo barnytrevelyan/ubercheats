@@ -101,24 +101,22 @@ export default function ComplaintForm({ onSubmitSuccess }) {
     setSuccess(false)
 
     try {
-      const data = new FormData()
-      data.append('name', formData.name)
-      data.append('email', formData.email)
-      data.append('category', formData.category)
-      data.append('title', formData.title)
-      data.append('description', formData.description)
-      data.append('orderAmount', formData.orderAmount)
-      data.append('orderCurrency', formData.orderCurrency)
-      data.append('orderDate', formData.orderDate)
-      data.append('uberOrderNumber', formData.uberOrderNumber)
-
-      uploadedFiles.forEach((file) => {
-        data.append('files', file)
-      })
-
       const response = await fetch('/api/complaints', {
         method: 'POST',
-        body: data,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          category: formData.category,
+          title: formData.title,
+          description: formData.description,
+          orderAmount: formData.orderAmount ? parseFloat(formData.orderAmount) : null,
+          orderCurrency: formData.orderCurrency,
+          orderDate: formData.orderDate,
+          uberOrderNumber: formData.uberOrderNumber,
+        }),
       })
 
       if (!response.ok) {
@@ -288,30 +286,11 @@ export default function ComplaintForm({ onSubmitSuccess }) {
         />
       </div>
 
-      <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Upload Evidence (Optional)</label>
-        <p className="text-sm text-gray-600 mb-3">
-          Attach screenshots, receipts, or any documentation to support your claim. Accepted formats: JPG, PNG, PDF (max 5MB each)
+      <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <label className="block text-gray-700 font-semibold mb-2">📎 Upload Evidence (Coming Soon)</label>
+        <p className="text-sm text-gray-600">
+          File uploads are coming soon. For now, describe your evidence in the detailed description field. Include order numbers, amounts, dates, and what happened.
         </p>
-        <input
-          type="file"
-          multiple
-          onChange={handleFileChange}
-          accept="image/jpeg,image/png,application/pdf"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        {uploadedFiles.length > 0 && (
-          <div className="mt-3">
-            <p className="text-sm font-semibold text-gray-700 mb-2">Selected files:</p>
-            <ul className="space-y-1">
-              {uploadedFiles.map((file, idx) => (
-                <li key={idx} className="text-sm text-gray-600 flex items-center">
-                  <span className="text-green-600 mr-2">✓</span> {file.name} ({(file.size / 1024).toFixed(2)} KB)
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
 
       <button
