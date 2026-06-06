@@ -1,33 +1,40 @@
 import { createClient } from '@supabase/supabase-js'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ubercheats.info'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ubercheats.info'
 
-function generateSitemap(complaints) {
-  const staticPages = [
-    { url: SITE_URL, changefreq: 'daily', priority: '1.0' },
+const STATIC_PAGES = [
+  { url: '/',              changefreq: 'daily',   priority: '1.0' },
+  { url: '/guide',         changefreq: 'weekly',  priority: '0.9' },
+  { url: '/legal',         changefreq: 'weekly',  priority: '0.8' },
+  { url: '/directory',     changefreq: 'daily',   priority: '0.9' },
+  { url: '/uber-contacts', changefreq: 'weekly',  priority: '0.7' },
+]
+
+function generateSitemap(complaints, countries) {
+  const allPages = [
+    ...STATIC_PAGES.map(p => ({ ...p, url: SITE_URL + p.url })),
+    ...(countries || []).map(c => ({
+      url: `${SITE_URL}/directory/${c.slug}`,
+      changefreq: 'weekly',
+      priority: '0.8',
+      lastmod: c.updated_at,
+    })),
+    ...(complaints || []).map(c => ({
+      url: `${SITE_URL}/complaints/${c.id}`,
+      changefreq: 'weekly',
+      priority: '0.6',
+      lastmod: c.updated_at || c.created_at,
+    })),
   ]
-
-  const complaintPages = complaints.map((c) => ({
-    url: `${SITE_URL}/complaints/${c.id}`,
-    changefreq: 'weekly',
-    priority: '0.8',
-    lastmod: c.updated_at || c.created_at,
-  }))
-
-  const allPages = [...staticPages, ...complaintPages]
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allPages
-  .map(
-    (p) => `  <url>
+${allPages.map(p => `  <url>
     <loc>${p.url}</loc>
     ${p.lastmod ? `<lastmod>${new Date(p.lastmod).toISOString().split('T')[0]}</lastmod>` : ''}
     <changefreq>${p.changefreq}</changefreq>
     <priority>${p.priority}</priority>
-  </url>`
-  )
-  .join('\n')}
+  </url>`).join('\n')}
 </urlset>`
 }
 
@@ -37,12 +44,12 @@ export async function getServerSideProps({ res }) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   )
 
-  const { data: complaints } = await supabase
-    .from('complaints')
-    .select('id, created_at, updated_at')
-    .order('created_at', { ascending: false })
+  const [{ data: complaints }, { data: countries }] = await Promise.all([
+    supabase.from('complaints').select('id, created_at, updated_at').order('created_at', { ascending: false }),
+    supabase.from('countries').select('slug, updated_at').order('name'),
+  ])
 
-  const sitemap = generateSitemap(complaints || [])
+  const sitemap = generateSitemap(complaints, countries)
 
   res.setHeader('Content-Type', 'application/xml')
   res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400')
@@ -52,6 +59,4 @@ export async function getServerSideProps({ res }) {
   return { props: {} }
 }
 
-export default function Sitemap() {
-  return null
-}
+export default function Sitemap() { return null }

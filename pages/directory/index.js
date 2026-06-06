@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ubercheats.info'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ubercheats.info'
 
 const REGION_ORDER = ['Africa','Asia Pacific','Europe','Latin America','Middle East','North America']
 

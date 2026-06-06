@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { createClient } from '@supabase/supabase-js'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ubercheats.info'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ubercheats.info'
 
 export async function getServerSideProps({ params }) {
   const supabase = createClient(

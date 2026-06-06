@@ -4,7 +4,16 @@ import Link from 'next/link'
 import ComplaintForm from '../components/ComplaintForm'
 import ComplaintList from '../components/ComplaintList'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ubercheats.info'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ubercheats.info'
+
+const FAQ_ITEMS = [
+  { q: 'How do I get a refund from Uber Eats?', a: 'Report in-app within 48 hours, then escalate to social media (@UberEats, @Uber_Support), then initiate a bank chargeback, then file with your national consumer regulator. See our step-by-step guide at /guide.' },
+  { q: 'Can I do a chargeback on Uber Eats?', a: 'Yes. Contact your bank or card issuer and dispute the charge. Visa and Mastercard give you 60–120 days from the transaction date. In the UK, Section 75 covers credit card purchases over £100.' },
+  { q: 'Has the FTC sued Uber?', a: 'Yes. The FTC and 21 US states sued Uber in April 2025 for deceptive Uber One billing and cancellation practices. An amended complaint was filed in December 2025.' },
+  { q: 'Is UberCheats affiliated with Uber?', a: 'No. UberCheats is an independent consumer advocacy platform. It is not affiliated with, authorised, or endorsed by Uber Technologies, Inc.' },
+  { q: 'What is Uber Eats refund policy?', a: 'Uber Eats claims to offer refunds for missing items, wrong orders, or undelivered food, but in practice frequently refuses. Under consumer law in most jurisdictions you are legally entitled to a refund for services not rendered.' },
+  { q: 'How do I escalate an Uber complaint?', a: 'Step 1: in-app dispute. Step 2: tweet @UberEats and @Uber_Support publicly with your order number. Step 3: bank chargeback. Step 4: national consumer regulator complaint. Step 5: small claims court.' },
+]
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -15,6 +24,7 @@ const jsonLd = {
       url: SITE_URL,
       name: 'UberCheats',
       description: 'Public database of Uber refund failures, double charges, and billing disputes worldwide.',
+      potentialAction: { '@type': 'SearchAction', target: { '@type': 'EntryPoint', urlTemplate: `${SITE_URL}/?q={search_term_string}` }, 'query-input': 'required name=search_term_string' },
     },
     {
       '@type': 'Organization',
@@ -22,6 +32,14 @@ const jsonLd = {
       name: 'UberCheats',
       url: SITE_URL,
       description: 'Independent consumer advocacy database for Uber billing disputes.',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: FAQ_ITEMS.map(item => ({
+        '@type': 'Question',
+        name: item.q,
+        acceptedAnswer: { '@type': 'Answer', text: item.a },
+      })),
     },
   ],
 }
@@ -255,6 +273,27 @@ export default function Home() {
             ))}
           </section>
 
+          {/* FAQ */}
+          <section className="mt-16">
+            <h2 className="text-xl font-bold text-gray-900 mb-5">Frequently Asked Questions</h2>
+            <div className="space-y-3">
+              {FAQ_ITEMS.map((item, i) => (
+                <details key={i} className="group bg-white border border-gray-200 rounded-xl overflow-hidden">
+                  <summary className="flex items-center justify-between px-5 py-4 cursor-pointer font-semibold text-gray-800 hover:bg-gray-50 list-none">
+                    <span>{item.q}</span>
+                    <span className="text-gray-400 group-open:rotate-180 transition-transform shrink-0 ml-3">▼</span>
+                  </summary>
+                  <div className="px-5 pb-4 text-sm text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                    {item.a}
+                  </div>
+                </details>
+              ))}
+            </div>
+            <p className="mt-4 text-sm text-gray-500">
+              More questions? Read the <Link href="/guide" className="text-red-600 underline">complete refund guide</Link>.
+            </p>
+          </section>
+
           {/* About */}
           <section className="mt-12 p-6 bg-white border border-gray-200 rounded-xl text-sm text-gray-600">
             <h2 className="font-bold text-gray-800 mb-2">About UberCheats</h2>
@@ -289,6 +328,7 @@ export default function Home() {
                 <ul className="space-y-1">
                   <li><Link href="/" className="hover:text-white transition">Report a Case</Link></li>
                   <li><Link href="/my-complaints" className="hover:text-white transition">Manage My Cases</Link></li>
+                  <li><Link href="/about" className="hover:text-white transition">About</Link></li>
                   <li><Link href="/uber-contacts" className="hover:text-white transition">Uber Contacts</Link></li>
                 </ul>
               </div>

@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ubercheats.info'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ubercheats.info'
 
 const STEPS = [
   {
