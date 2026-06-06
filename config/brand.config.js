@@ -476,6 +476,11 @@ Yours sincerely,
 [YOUR EMAIL]`,
 
 
+
+  // ── Currencies ─────────────────────────────────────────────────────────────
+  defaultCurrency: 'USD',
+  currencies: null, // null = use the full built-in list in ComplaintForm
+
   // ── Complaint form field labels ────────────────────────────────────────────
   formFields: {
     amountLabel: 'Order Amount',

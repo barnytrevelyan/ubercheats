@@ -14,7 +14,8 @@ async function uploadFile(file, complaintId) {
 
 const CATEGORIES = BRAND.categories.map(c => c.label)
 
-const CURRENCIES = [
+// Use brand config currencies if provided, otherwise fall back to the full list
+const FULL_CURRENCIES = [
   { code: 'AED', symbol: 'د.إ', name: 'UAE Dirham', rate: 3.67 },
   { code: 'ARS', symbol: '$', name: 'Argentine Peso', rate: 834.50 },
   { code: 'AUD', symbol: 'A$', name: 'Australian Dollar', rate: 1.53 },
@@ -32,43 +33,33 @@ const CURRENCIES = [
   { code: 'GBP', symbol: '£', name: 'British Pound', rate: 0.79 },
   { code: 'GHS', symbol: '₵', name: 'Ghanaian Cedi', rate: 12.45 },
   { code: 'HKD', symbol: 'HK$', name: 'Hong Kong Dollar', rate: 7.81 },
-  { code: 'HRK', symbol: 'kn', name: 'Croatian Kuna', rate: 6.86 },
   { code: 'HUF', symbol: 'Ft', name: 'Hungarian Forint', rate: 363.20 },
   { code: 'IDR', symbol: 'Rp', name: 'Indonesian Rupiah', rate: 16245.00 },
   { code: 'ILS', symbol: '₪', name: 'Israeli Shekel', rate: 3.68 },
   { code: 'INR', symbol: '₹', name: 'Indian Rupee', rate: 83.12 },
-  { code: 'ISK', symbol: 'kr', name: 'Icelandic Króna', rate: 137.45 },
-  { code: 'JOD', symbol: 'د.ا', name: 'Jordanian Dinar', rate: 0.71 },
   { code: 'JPY', symbol: '¥', name: 'Japanese Yen', rate: 149.50 },
   { code: 'KES', symbol: 'Sh', name: 'Kenyan Shilling', rate: 145.30 },
-  { code: 'KWD', symbol: 'د.ك', name: 'Kuwaiti Dinar', rate: 0.31 },
-  { code: 'KZT', symbol: '₸', name: 'Kazakhstani Tenge', rate: 436.50 },
-  { code: 'LKR', symbol: 'Rs', name: 'Sri Lankan Rupee', rate: 312.50 },
   { code: 'MXN', symbol: '$', name: 'Mexican Peso', rate: 17.05 },
   { code: 'MYR', symbol: 'RM', name: 'Malaysian Ringgit', rate: 4.71 },
   { code: 'NGN', symbol: '₦', name: 'Nigerian Naira', rate: 1540.50 },
   { code: 'NOK', symbol: 'kr', name: 'Norwegian Krone', rate: 10.68 },
-  { code: 'NPR', symbol: '₨', name: 'Nepalese Rupee', rate: 132.40 },
   { code: 'NZD', symbol: 'NZ$', name: 'New Zealand Dollar', rate: 1.65 },
-  { code: 'OMR', symbol: '﷼', name: 'Omani Rial', rate: 0.38 },
+  { code: 'PEN', symbol: 'S/', name: 'Peruvian Sol', rate: 3.68 },
   { code: 'PHP', symbol: '₱', name: 'Philippine Peso', rate: 56.78 },
   { code: 'PKR', symbol: '₨', name: 'Pakistani Rupee', rate: 278.45 },
   { code: 'PLN', symbol: 'zł', name: 'Polish Zloty', rate: 4.02 },
-  { code: 'QAR', symbol: '﷼', name: 'Qatari Riyal', rate: 3.64 },
   { code: 'RON', symbol: 'lei', name: 'Romanian Leu', rate: 4.97 },
-  { code: 'RUB', symbol: '₽', name: 'Russian Ruble', rate: 97.50 },
   { code: 'SAR', symbol: '﷼', name: 'Saudi Riyal', rate: 3.75 },
   { code: 'SEK', symbol: 'kr', name: 'Swedish Krona', rate: 10.42 },
   { code: 'SGD', symbol: 'S$', name: 'Singapore Dollar', rate: 1.35 },
   { code: 'THB', symbol: '฿', name: 'Thai Baht', rate: 35.92 },
   { code: 'TRY', symbol: '₺', name: 'Turkish Lira', rate: 33.28 },
-  { code: 'UGX', symbol: 'Sh', name: 'Ugandan Shilling', rate: 3725.00 },
   { code: 'USD', symbol: '$', name: 'US Dollar', rate: 1 },
-  { code: 'UZS', symbol: 'сўм', name: 'Uzbekistani Som', rate: 11850.00 },
-  { code: 'VND', symbol: '₫', name: 'Vietnamese Dong', rate: 24680.00 },
   { code: 'ZAR', symbol: 'R', name: 'South African Rand', rate: 18.65 },
-  { code: 'PEN', symbol: 'S/', name: 'Peruvian Sol', rate: 3.68 },
 ]
+const CURRENCIES = BRAND.currencies || FULL_CURRENCIES
+const DEFAULT_CURRENCY = BRAND.defaultCurrency || 'USD'
+
 
 export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
   const [loading, setLoading] = useState(false)
@@ -88,7 +79,7 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
     title: '',
     description: '',
     orderAmount: '',
-    orderCurrency: 'USD',
+    orderCurrency: DEFAULT_CURRENCY,
     orderDate: '',
     uberOrderNumber: '',
   })
@@ -165,7 +156,7 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
         title: '',
         description: '',
         orderAmount: '',
-        orderCurrency: 'USD',
+        orderCurrency: DEFAULT_CURRENCY,
         orderDate: '',
         uberOrderNumber: '',
       })
