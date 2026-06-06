@@ -1,14 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['images.unsplash.com'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: '*.supabase.co' },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   async redirects() {
     return [
-      // Canonical: always www
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'ubercheats.info' }],
