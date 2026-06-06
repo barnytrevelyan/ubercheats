@@ -38,9 +38,22 @@ export default function About() {
           </div>
         </nav>
 
+        <div className="relative bg-gray-900 overflow-hidden" style={{height: '160px'}}>
+          <img
+            src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&h=320&fit=crop&crop=center"
+            alt="Consumer advocacy and community"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 flex items-center px-6">
+            <div className="max-w-4xl mx-auto">
+              <h1 className="text-2xl font-black text-white">About UberCheats</h1>
+              <p className="text-gray-400 text-sm mt-1">Independent consumer advocacy · Worldwide</p>
+            </div>
+          </div>
+        </div>
+
         <main className="max-w-3xl mx-auto px-4 py-14 sm:px-6">
-          <h1 className="text-3xl font-black text-gray-900 mb-2">About UberCheats</h1>
-          <p className="text-gray-500 text-sm mb-10">Independent consumer advocacy · Worldwide · Founded 2026</p>
+          <p className="text-gray-500 text-sm mb-10 mt-6">Founded 2026</p>
 
           <div className="prose prose-gray max-w-none space-y-6 text-gray-700 leading-relaxed">
             <section>

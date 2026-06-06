@@ -66,7 +66,7 @@ function StatsBar() {
       <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 grid grid-cols-2 sm:grid-cols-3 gap-4 text-center">
         <div>
           <div className="text-2xl font-black">{fmt(stats?.totalCases)}</div>
-          <div className="text-red-200 text-xs uppercase tracking-wide font-semibold">Cases documented</div>
+          <div className="text-red-200 text-xs uppercase tracking-wide font-semibold">{stats?.totalCases === 1 ? 'Case documented' : 'Cases documented'}</div>
         </div>
         <div>
           <div className="text-2xl font-black">{fmtUSD(stats?.totalUSD)}</div>
@@ -74,7 +74,7 @@ function StatsBar() {
         </div>
         <div className="col-span-2 sm:col-span-1">
           <div className="text-2xl font-black">{fmt(stats?.resolvedCases)}</div>
-          <div className="text-red-200 text-xs uppercase tracking-wide font-semibold">Cases resolved</div>
+          <div className="text-red-200 text-xs uppercase tracking-wide font-semibold">{stats?.resolvedCases === 1 ? 'Case resolved' : 'Cases resolved'}</div>
         </div>
       </div>
     </div>
@@ -113,14 +113,14 @@ export default function Home() {
 
         {/* Top nav */}
         <nav className="bg-gray-900 text-white px-4 py-3 text-sm">
-          <div className="max-w-6xl mx-auto flex items-center justify-between">
-            <span className="font-black text-lg tracking-tight">UberCheats</span>
-            <div className="flex items-center gap-4 text-gray-300 text-xs">
-              <Link href="/directory" className="hover:text-white transition">🌍 Directory</Link>
-              <Link href="/guide" className="hover:text-white transition">📖 Guide</Link>
-              <Link href="/legal" className="hover:text-white transition">⚖️ Legal</Link>
-              <Link href="/uber-contacts" className="hover:text-white transition">📱 Contacts</Link>
-              <Link href="/my-complaints" className="hidden sm:inline hover:text-white transition">My Cases</Link>
+          <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
+            <Link href="/" className="font-black text-lg tracking-tight shrink-0 hover:text-gray-200 transition">UberCheats</Link>
+            <div className="flex items-center flex-wrap justify-end gap-x-4 gap-y-1 text-gray-300 text-xs">
+              <Link href="/directory" className="hover:text-white transition whitespace-nowrap">🌍 Directory</Link>
+              <Link href="/guide" className="hover:text-white transition whitespace-nowrap">📖 Guide</Link>
+              <Link href="/legal" className="hover:text-white transition whitespace-nowrap">⚖️ Legal</Link>
+              <Link href="/uber-contacts" className="hover:text-white transition whitespace-nowrap hidden sm:inline">📱 Contacts</Link>
+              <Link href="/my-complaints" className="hover:text-white transition whitespace-nowrap hidden md:inline">My Cases</Link>
             </div>
           </div>
         </nav>
@@ -131,9 +131,9 @@ export default function Home() {
         {/* Hero */}
         <header className="relative overflow-hidden bg-gray-900 min-h-[420px] flex items-center">
           <img
-            src="https://images.unsplash.com/photo-1580910051074-3eb694886505?w=1400&h=500&fit=crop&crop=center"
-            alt="Frustrated consumer with phone"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${heroLoaded ? 'opacity-25' : 'opacity-0'}`}
+            src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1400&h=600&fit=crop&crop=center"
+            alt="Person stressed over billing dispute"
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${heroLoaded ? 'opacity-35' : 'opacity-0'}`}
             onLoad={() => setHeroLoaded(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/90 to-gray-900/60" />
@@ -151,7 +151,7 @@ export default function Home() {
                 A global, crowdsourced record of Uber Eats refund failures, double charges, and unresolved billing disputes.
                 Every case is a permanent public record. Find out how to fight back in your country.
               </p>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3">
                 <button
                   onClick={() => setActiveTab('report')}
                   className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-lg transition text-sm"

@@ -157,9 +157,9 @@ export default function Guide() {
 
         <header className="relative bg-gray-900 text-white py-14 px-4 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1200&h=400&fit=crop&crop=top"
-            alt="Consumer rights documents"
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
+            src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1400&h=500&fit=crop&crop=center"
+            alt="Consumer rights documents and paperwork"
+            className="absolute inset-0 w-full h-full object-cover opacity-30"
           />
           <div className="relative max-w-4xl mx-auto">
             <div className="text-sm text-gray-400 mb-2">Last updated June 2026</div>

@@ -63,55 +63,47 @@ Yours sincerely,
 [YOUR EMAIL]`
 }
 
-// ── Section table ─────────────────────────────────────────────
+// ── Section entries — responsive cards (works on mobile) ─────
 function EntryTable({ entries, emptyMessage, section }) {
   if (!entries.length) return <p className="text-sm text-gray-500 italic py-3">{emptyMessage}</p>
 
   const isExec = section === 'executive'
 
   return (
-    <div className="overflow-x-auto">
+    <div>
       {isExec && (
-        <div className="mb-3 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
+        <div className="mb-4 flex items-start gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
           <span className="text-base leading-none">⚠️</span>
           <span>
             <strong>Verify before use:</strong> Executive roles change. Always confirm the current title on LinkedIn before sending a message.
-            This directory reflects publicly available information — if you spot an outdated entry, use the Contribute button below to flag it.
+            If you spot an outdated entry, use the Contribute button below to flag it.
           </span>
         </div>
       )}
-      <table className="w-full text-sm border-collapse">
-        <thead>
-          <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            <th className="px-3 py-2 border border-gray-200 w-1/4">Role / Type</th>
-            <th className="px-3 py-2 border border-gray-200 w-1/4">Name / Organisation</th>
-            <th className="px-3 py-2 border border-gray-200">Notes & Action</th>
-            <th className="px-3 py-2 border border-gray-200 w-24">Link</th>
-          </tr>
-        </thead>
-        <tbody>
-          {entries.map((e) => (
-            <tr key={e.id} className="hover:bg-gray-50 align-top">
-              <td className="px-3 py-3 border border-gray-200 font-medium text-gray-700">{e.role_or_type}</td>
-              <td className="px-3 py-3 border border-gray-200">
-                <div className="font-semibold text-gray-900">{e.name}</div>
+      <div className="space-y-3">
+        {entries.map((e) => (
+          <div key={e.id} className="border border-gray-200 rounded-xl p-4 bg-white hover:shadow-sm transition">
+            <div className="flex items-start justify-between gap-3 mb-2">
+              <div className="flex-1 min-w-0">
+                <div className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-0.5">{e.role_or_type}</div>
+                <div className="font-bold text-gray-900 text-base">{e.name}</div>
                 {e.last_verified_note && (
-                  <div className="text-xs text-gray-400 mt-1">🕐 {e.last_verified_note}</div>
+                  <div className="text-xs text-gray-400 mt-0.5">🕐 {e.last_verified_note}</div>
                 )}
-              </td>
-              <td className="px-3 py-3 border border-gray-200 text-gray-600 leading-relaxed">{e.notes}</td>
-              <td className="px-3 py-3 border border-gray-200">
-                {e.contact_url ? (
-                  <a href={e.contact_url} target="_blank" rel="noopener noreferrer"
-                    className="inline-block text-xs text-blue-600 hover:underline bg-blue-50 px-2 py-1 rounded">
-                    Visit →
-                  </a>
-                ) : <span className="text-gray-300">—</span>}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </div>
+              {e.contact_url && (
+                <a href={e.contact_url} target="_blank" rel="noopener noreferrer"
+                  className="shrink-0 text-xs text-blue-600 hover:underline bg-blue-50 border border-blue-100 px-3 py-1.5 rounded-lg font-medium">
+                  Visit →
+                </a>
+              )}
+            </div>
+            {e.notes && (
+              <p className="text-sm text-gray-600 leading-relaxed">{e.notes}</p>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

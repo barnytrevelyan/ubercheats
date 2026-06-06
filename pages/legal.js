@@ -133,9 +133,9 @@ export default function Legal() {
 
         <header className="relative bg-gray-900 text-white py-14 px-4 overflow-hidden">
           <img
-            src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1200&h=400&fit=crop"
-            alt="Legal documents and gavel"
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
+            src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1400&h=500&fit=crop&crop=top"
+            alt="Legal professional and court documents"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
           />
           <div className="relative max-w-4xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-black mb-3">⚖️ Legal & Regulatory Tracker</h1>

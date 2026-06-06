@@ -64,14 +64,20 @@ export default function DirectoryIndex({ countries }) {
         </nav>
 
         {/* Hero */}
-        <div className="bg-gray-900 text-white py-14 px-4">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="relative bg-gray-900 text-white py-14 px-4 overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&h=400&fit=crop&crop=center"
+            alt="Globe showing global consumer advocacy"
+            className="absolute inset-0 w-full h-full object-cover opacity-20"
+          />
+          <div className="relative max-w-4xl mx-auto text-center">
             <div className="text-4xl mb-3">🌍</div>
             <h1 className="text-3xl md:text-4xl font-bold mb-3">Global Recourse Directory</h1>
             <p className="text-gray-300 text-lg max-w-2xl mx-auto">
               Select your country to find the executives, payment dispute routes, and regulatory bodies
               that can actually get your money back from Uber Eats.
             </p>
+          </div>
           </div>
         </div>
 
