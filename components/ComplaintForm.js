@@ -243,7 +243,7 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Order Amount</label>
+        <label className="block text-gray-700 font-semibold mb-2">{BRAND.formFields.amountLabel}</label>
         <div className="flex gap-2">
           <input
             type="number"
@@ -267,11 +267,11 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
             ))}
           </select>
         </div>
-        <p className="text-xs text-gray-500 mt-1">Amount will be converted to USD for comparison</p>
+        <p className="text-xs text-gray-500 mt-1">{BRAND.formFields.amountHelper}</p>
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Order Date</label>
+        <label className="block text-gray-700 font-semibold mb-2">{BRAND.formFields.dateLabel}</label>
         <input
           type="date"
           name="orderDate"
@@ -282,20 +282,20 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Order Reference Number (Optional)</label>
+        <label className="block text-gray-700 font-semibold mb-2">{BRAND.formFields.refLabel}</label>
         <input
           type="text"
           name="uberOrderNumber"
           value={formData.uberOrderNumber}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="e.g., order ID or reference number"
+          placeholder={BRAND.formFields.refPlaceholder}
         />
-        <p className="text-xs text-gray-500 mt-1">Include any order number or reference ID to support your claim</p>
+        <p className="text-xs text-gray-500 mt-1">{BRAND.formFields.refHelper}</p>
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 font-semibold mb-2">Brief Title</label>
+        <label className="block text-gray-700 font-semibold mb-2">{BRAND.formFields.titleLabel}</label>
         <input
           type="text"
           name="title"
@@ -303,12 +303,12 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
           onChange={handleChange}
           required
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="e.g., Charged $45.50 but order was cancelled"
+          placeholder={BRAND.formFields.titlePlaceholder}
         />
       </div>
 
       <div className="mb-6">
-        <label className="block text-gray-700 font-semibold mb-2">Detailed Description</label>
+        <label className="block text-gray-700 font-semibold mb-2">{BRAND.formFields.descLabel}</label>
         <textarea
           name="description"
           value={formData.description}
@@ -316,7 +316,7 @@ export default function ComplaintForm({ onSubmitSuccess, initialCategory }) {
           required
           rows="5"
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Describe what happened. Include dates, order details, attempts to contact support, etc."
+          placeholder={BRAND.formFields.descPlaceholder}
         />
       </div>
 

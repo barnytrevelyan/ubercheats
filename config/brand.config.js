@@ -475,6 +475,21 @@ Yours sincerely,
 [YOUR NAME]
 [YOUR EMAIL]`,
 
+
+  // ── Complaint form field labels ────────────────────────────────────────────
+  formFields: {
+    amountLabel: 'Order Amount',
+    amountHelper: 'Amount will be converted to USD for comparison',
+    dateLabel: 'Order Date',
+    refLabel: 'Order Reference Number (Optional)',
+    refPlaceholder: 'e.g., order ID or reference number',
+    refHelper: 'Include any order number or reference ID to support your claim',
+    titleLabel: 'Brief Title',
+    titlePlaceholder: 'e.g., Charged $45.50 but order was cancelled',
+    descLabel: 'Detailed Description',
+    descPlaceholder: 'Describe what happened. Include dates, order details, attempts to contact support, etc.',
+  },
+
   // ── llms.txt ───────────────────────────────────────────────────────────────
   llmsTxt: `# UberCheats
 
