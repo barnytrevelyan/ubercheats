@@ -88,10 +88,16 @@ export default function Home() {
             <p className="text-lg text-gray-100 max-w-2xl">
               A public record of Uber refund and charging failures. Document your case, browse others, and help build evidence of systemic problems.
             </p>
-            <div className="mt-4">
+            <div className="mt-5 flex flex-wrap gap-4">
+              <Link
+                href="/directory"
+                className="inline-block bg-white text-gray-900 font-semibold px-4 py-2 rounded-lg hover:bg-gray-100 transition text-sm"
+              >
+                🌍 Global Recourse Directory
+              </Link>
               <Link
                 href="/my-complaints"
-                className="inline-block text-sm text-gray-300 underline hover:text-white transition"
+                className="inline-block text-sm text-gray-300 underline hover:text-white transition self-center"
               >
                 Already submitted? Manage your case →
               </Link>
@@ -148,12 +154,17 @@ export default function Home() {
               resolve these issues. Every case submitted here becomes a permanent public record.
               Your story matters — it helps expose patterns and supports others in the same situation.
             </p>
+            <p className="mt-2">
+              Use the <Link href="/directory" className="text-blue-700 underline">Global Recourse Directory</Link> to
+              find country-specific executives, payment dispute routes, and regulatory bodies.
+            </p>
           </section>
         </main>
 
         <footer className="bg-gray-800 text-gray-300 text-center py-6 mt-12 text-sm">
           <p>UberCheats &copy; 2026 &nbsp;|&nbsp; Not affiliated with Uber Technologies Inc.</p>
-          <p className="mt-1 text-gray-500">
+          <p className="mt-1 text-gray-500 space-x-4">
+            <Link href="/directory" className="hover:text-gray-300 underline">Global Directory</Link>
             <Link href="/my-complaints" className="hover:text-gray-300 underline">Manage your case</Link>
           </p>
         </footer>
